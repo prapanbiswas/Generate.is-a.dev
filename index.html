@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ═══════════════════════════════════════════════
+    SEO: Title & Meta Tags
+    Targets conversational / diagnostic dev queries.
+  ═══════════════════════════════════════════════ -->
+  <title>is-a.dev JSON Generator — Fix PR Syntax Errors &amp; CI Pipeline Failures Instantly</title>
+
+  <meta name="description"
+    content="Is your is-a.dev pull request rejected? This free generator builds a perfectly valid JSON registration file that passes every CI check — no more malformed arrays, CNAME/TXT record conflicts, or missing owner fields causing GitHub Actions to fail.">
+
+  <link rel="canonical" href="https://your-username.github.io/your-repo/">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:title"       content="is-a.dev JSON Generator — Fix PR Syntax Errors &amp; CI Pipeline Failures">
+  <meta property="og:description" content="Stop getting your is-a.dev pull requests rejected. Generate a syntactically perfect JSON file — valid A record arrays, safe CNAME/TXT conflict detection, and correct owner schema — in seconds.">
+  <meta property="og:url"         content="https://your-username.github.io/your-repo/">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary">
+  <meta name="twitter:title"       content="is-a.dev JSON Generator — Zero Rejected PRs">
+  <meta name="twitter:description" content="Fix your is-a.dev CI pipeline failures instantly. Free browser tool — no install, no frameworks.">
+
+  <meta name="robots"      content="index, follow">
+  <meta name="theme-color" content="#0d1117">
+
+  <!-- ═══════════════════════════════════════════════
+    SEO: Schema.org JSON-LD
+    SoftwareApplication + FAQPage combined @graph.
+    FAQPage questions mirror the accordion below.
+  ═══════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "is-a.dev JSON Generator",
+        "url": "https://your-username.github.io/your-repo/",
+        "description": "A free, client-side browser utility that generates perfectly formatted, CI-validated JSON registration files for the is-a.dev free subdomain service. Prevents pull request rejections caused by malformed JSON arrays, CNAME/TXT record conflicts, and missing owner data.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript",
+        "inLanguage": "en",
+        "keywords": "is-a.dev, json generator, free subdomain, fix pull request rejected, cname vercel, github pages dns",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "provider": {
+          "@type": "Organization",
+          "name": "generator.is-a.dev"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I fix a pull request rejected JSON error on is-a.dev?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The most common reason a pull request is rejected on the is-a.dev repository is a JSON syntax violation. A records must be arrays even for a single IP: \"A\": [\"76.76.21.21\"]. A CNAME cannot coexist with A, AAAA, MX, or TXT records. Missing commas or trailing commas also cause immediate CI failure. Missing owner.username or owner.email fields will also trigger rejection. This generator enforces all rules automatically."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why is my is-a.dev CNAME record not working on Vercel?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Connecting an is-a.dev subdomain to Vercel requires two separate operations. The CNAME record in your is-a.dev JSON file must point to cname.vercel-dns.com. Vercel's domain verification TXT record must be added via Vercel's own dashboard — NOT inside the is-a.dev JSON file. Combining CNAME and TXT in the same file violates DNS protocol and the CI pipeline will reject it instantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Jason file generator for is a dev — is this the right tool for voice search users?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. JSON is officially pronounced identically to the name Jason per the ECMA-404 standard. Voice dictation software transcribes spoken queries about JSON files as queries about Jason files. Similarly, is-a.dev is often transcribed as isa dev or is a dot dev. This tool generates the JSON registration file you need."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "My isa dev pull request was denied — what are the most common JSON syntax errors?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Common causes: A records written as strings instead of arrays; CNAME written as an array instead of a string; CNAME combined with A, AAAA, MX, or TXT records; trailing or missing commas; wrong file name or directory path inside the repository."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ── LEFT COLUMN: Form ────────────────────────── -->
+    <div class="col-left pixel-box">
+      <div class="logo-wrap">
+        <img src="assets/logo.png" alt="is-a.dev JSON Generator" class="site-logo">
+      </div>
+      <h1>generator.is-a.dev</h1>
+      <p class="subtitle">Strict formatting. Zero rejected PRs.</p>
+
+      <h2>Owner Data</h2>
+
+      <label for="desc">Description</label>
+      <input type="text" id="desc" placeholder="My cool portfolio" oninput="generateJSON()">
+
+      <label for="repo">Repository (Optional)</label>
+      <input type="text" id="repo" placeholder="https://github.com/username/repo" oninput="generateJSON()">
+
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="github-username" oninput="generateJSON()">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="dev@example.com" oninput="generateJSON()">
+
+      <h2 class="dns-heading">DNS Records</h2>
+      <p class="dns-hint">Add modular blocks. Rules are auto-enforced.</p>
+
+      <div class="controls-row" id="recordControls">
+        <button class="btn-record" id="btn-A"    onclick="addCard('A')"   >+ A</button>
+        <button class="btn-record" id="btn-AAAA" onclick="addCard('AAAA')">+ AAAA</button>
+        <button class="btn-record" id="btn-CNAME"onclick="addCard('CNAME')">+ CNAME</button>
+        <button class="btn-record" id="btn-MX"   onclick="addCard('MX')"  >+ MX</button>
+        <button class="btn-record" id="btn-TXT"  onclick="addCard('TXT')" >+ TXT</button>
+        <button class="btn-record" id="btn-URL"  onclick="addCard('URL')" >+ URL</button>
+      </div>
+
+      <div id="cardsContainer"></div>
+    </div>
+
+    <!-- ── RIGHT COLUMN: Output ─────────────────────── -->
+    <div class="col-right pixel-box">
+      <h2>Output.json</h2>
+      <div id="statusBar" class="status-bar status-fail">WAITING FOR VALID INPUT...</div>
+      <pre id="jsonOutput">{}</pre>
+      <button class="btn-copy" onclick="copyToClipboard()">COPY TO CLIPBOARD</button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════
+      FAQ SECTION — below the fold, native HTML5 accordion.
+      No JavaScript. Fully crawlable. Fixes "thin content".
+      Keywords injected naturally for SEO without UX harm.
+    ══════════════════════════════════════════════════════ -->
+    <section class="faq-section pixel-box" aria-label="Frequently Asked Questions">
+      <h2 class="faq-heading">// FAQ — Troubleshooting &amp; Common Errors</h2>
+      <p class="faq-intro">Expand a question below. All known CI failure causes and DNS conflict rules are documented here.</p>
+
+      <!-- Q1: "how do i fix pull request rejected json error on is-a.dev" -->
+      <details class="faq-item">
+        <summary>How do I fix a pull request rejected JSON error on is-a.dev?</summary>
+        <div class="faq-answer">
+          <p>If your <span class="kw">is-a.dev pull request was rejected</span>, the GitHub Actions CI
+          pipeline detected a structural violation. This generator eliminates every known cause automatically:</p>
+
+          <p><span class="kc">1. A and AAAA records must be arrays.</span> The most common
+          <span class="kw">JSON error on is-a.dev</span> is writing a plain string for an A record.
+          Even a single IP address must be a JSON array:
+          <code>"A": ["76.76.21.21"]</code> — not <code>"A": "76.76.21.21"</code>.</p>
+
+          <p><span class="kc">2. CNAME cannot share a file with A, AAAA, MX, or TXT.</span> DNS protocol
+          forbids a CNAME at the same node as any other record type. The moment you add a CNAME card,
+          conflicting record type buttons are automatically disabled.</p>
+
+          <p><span class="kc">3. Trailing and missing commas.</span> JSON does not allow trailing commas
+          after the final property. This generator serialises with <code>JSON.stringify</code>,
+          so output is always syntactically valid.</p>
+
+          <p><span class="kc">4. Missing owner fields.</span> Both <code>owner.username</code> and
+          <code>owner.email</code> are required. The CI status bar turns red and tells you exactly
+          which field is missing before you ever submit.</p>
+        </div>
+      </details>
+
+      <!-- Q2: "why is my is-a.dev cname record not working on vercel" -->
+      <details class="faq-item">
+        <summary>Why is my is-a.dev CNAME record not working on Vercel?</summary>
+        <div class="faq-answer">
+          <p>This is the most misunderstood configuration in the
+          <span class="kw">is-a.dev ecosystem</span>. Connecting your subdomain to
+          <span class="kw">Vercel</span> requires two separate DNS operations that cannot
+          live inside the same JSON file.</p>
+
+          <p><span class="kc">Step 1 — The CNAME record.</span> Your <code>records</code> object
+          should contain only the CNAME pointing to <code>cname.vercel-dns.com</code>.
+          Submit this as your <span class="kw">is-a.dev pull request</span> and wait for it to merge.</p>
+
+          <p><span class="kc">Step 2 — Vercel domain verification.</span> Vercel requires a TXT record
+          to verify domain ownership. Adding this TXT record inside the same is-a.dev JSON file as the CNAME
+          will cause your <span class="kw">pull request to be denied</span> — a CNAME and a TXT record
+          cannot coexist at the same DNS node. The Vercel TXT record must be added via
+          Vercel's own dashboard under Domains &gt; DNS Records.</p>
+
+          <p><span class="kc">Why does this generator prevent it?</span> The moment you add a CNAME card,
+          the + TXT and + A buttons are automatically disabled — it is physically impossible to generate
+          a file that triggers this <span class="kw">is-a.dev CNAME not working</span> scenario.</p>
+        </div>
+      </details>
+
+      <!-- Q3: "jason file generator for is a dev" (phonetic / voice-search) -->
+      <details class="faq-item">
+        <summary>Searching for a "Jason file generator for is a dev"? You're in the right place.</summary>
+        <div class="faq-answer">
+          <p>If you arrived here by searching for a <span class="kw">Jason file generator for is a dev</span>,
+          or asked a voice assistant to find a <em>"Jason format tool"</em> or a
+          <em>"Jason script for isa dev repo"</em> — this is exactly what you need.</p>
+
+          <p><span class="kc">Why "Jason"?</span> The data format used for is-a.dev registration files is
+          <strong>JSON</strong> — JavaScript Object Notation. According to the official ECMA-404 and
+          ISO/IEC 21778 standards, JSON is phonetically pronounced <em>/ˈdʒeɪ.sən/</em> — acoustically
+          identical to the English name <em>Jason</em>. Voice assistants including Siri, Google Assistant,
+          Alexa, and Cortana transcribe spoken queries about <span class="kw">JSON files</span> as queries
+          about <span class="kw">Jason files</span>.</p>
+
+          <p><span class="kc">Why "isa dev" or "is a dot dev"?</span> When developers dictate the domain
+          string <em>is-a.dev</em> aloud, speech-to-text engines frequently strip the hyphens and output
+          <em>isa dev</em>, <em>is a dot dev</em>, or <em>is it dev</em>. All refer to the same free
+          open-source subdomain registry on GitHub at <code>is-a.dev</code>.</p>
+
+          <p>This tool generates the <span class="kw">JSON (Jason) registration file</span> you need to
+          submit a valid GitHub pull request — no manual JSON editing required.</p>
+        </div>
+      </details>
+
+      <!-- Q4: "isa dev pull request denied" (typographic / rapid-type variant) -->
+      <details class="faq-item">
+        <summary>"isa dev pull request denied" — complete list of JSON syntax errors that cause rejection</summary>
+        <div class="faq-answer">
+          <p>Whether you type it as <span class="kw">isa dev pull request denied</span>,
+          <em>isA-dev PR rejected</em>, or <em>is-a.dev pull request failed CI</em> — the cause is
+          a syntax or schema violation in your JSON file. Every known error pattern, in order of frequency:</p>
+
+          <p><span class="kc">Error 1 — A record is a string, not an array.</span>
+          <code>"A": "76.76.21.21"</code> will always be <span class="kw">denied</span>.
+          Correct form: <code>"A": ["76.76.21.21"]</code>.</p>
+
+          <p><span class="kc">Error 2 — CNAME formatted as an array.</span>
+          <code>"CNAME": ["username.github.io"]</code> will fail.
+          Correct form: <code>"CNAME": "username.github.io"</code>.</p>
+
+          <p><span class="kc">Error 3 — CNAME coexists with another record type.</span> Any combination
+          of CNAME with A, AAAA, MX, or TXT causes an <span class="kw">is-a.dev PR denial</span>.</p>
+
+          <p><span class="kc">Error 4 — Trailing comma after the last JSON property.</span>
+          Standard JSON forbids trailing commas. <code>{ "username": "dev", }</code> is invalid.</p>
+
+          <p><span class="kc">Error 5 — Wrong file name or directory path.</span> Your file must be inside
+          the <code>/domains/</code> directory and named exactly as your desired subdomain, e.g.
+          <code>mysubdomain.json</code>.</p>
+
+          <p>This generator passes errors 1–4 automatically. Error 5 is documented here so you have
+          a complete reference before submitting your pull request.</p>
+        </div>
+      </details>
+
+    </section>
+  </div><!-- /.container -->
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+/* ================================================================
+   style.css — is-a.dev JSON Generator
+   Retro pixel-art / terminal theme using VT323 bitmap font.
+   All layout, component, and FAQ accordion styles live here.
+   ================================================================ */
+
+/* ── Design Tokens ────────────────────────────────────────────── */
+:root {
+  --bg-main:      #0d1117;
+  --bg-panel:     #161b22;
+  --text-main:    #c9d1d9;
+  --text-muted:   #8b949e;
+  --border:       #30363d;
+  --accent-cyan:  #58a6ff;
+  --accent-purple:#bc8cff;
+  --error:        #f85149;
+  --success:      #3fb950;
+  --output-green: #8ddb8c;
+}
+
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'VT323', monospace;
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Layout ───────────────────────────────────────────────────── */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Pixelated hard-shadow box — the signature retro treatment */
+.pixel-box {
+  background: var(--bg-panel);
+  border: 2px solid var(--border);
+  padding: 20px;
+  box-shadow: 6px 6px 0px #000;
+}
+
+.col-left,
+.col-right {
+  flex: 1;
+  min-width: 350px;
+}
+
+/* ── Typography ───────────────────────────────────────────────── */
+h1, h2, h3 {
+  text-transform: uppercase;
+  margin-top: 0;
+  letter-spacing: 1px;
+}
+
+h1 {
+  color: var(--accent-purple);
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+}
+
+h2 {
+  color: var(--accent-cyan);
+  border-bottom: 2px dashed var(--border);
+  padding-bottom: 10px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin-top: -5px;
+}
+
+/* ── Site Logo ────────────────────────────────────────────────── */
+.logo-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.site-logo {
+  width: 140px;
+  height: 140px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(0 0 14px rgba(88, 166, 255, 0.55))
+          drop-shadow(0 0 28px rgba(188, 140, 255, 0.30));
+  transition: filter 0.3s;
+}
+
+.site-logo:hover {
+  filter: drop-shadow(0 0 20px rgba(88, 166, 255, 0.85))
+          drop-shadow(0 0 40px rgba(188, 140, 255, 0.50));
+}
+
+.dns-heading {
+  margin-top: 30px;
+}
+
+.dns-hint {
+  font-size: 1.1rem;
+  color: var(--accent-purple);
+}
+
+/* ── Form Controls ────────────────────────────────────────────── */
+label {
+  display: block;
+  margin-top: 15px;
+  color: var(--accent-cyan);
+}
+
+input {
+  width: 100%;
+  background: var(--bg-main);
+  border: 2px solid var(--border);
+  color: var(--text-main);
+  font-family: 'VT323', monospace;
+  font-size: 1.3rem;
+  padding: 8px;
+  margin-top: 5px;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--accent-purple);
+}
+
+input.invalid {
+  border-color: var(--error);
+  background: rgba(248, 81, 73, 0.1);
+}
+
+/* ── Buttons (shared base) ────────────────────────────────────── */
+button {
+  font-family: 'VT323', monospace;
+  font-size: 1.3rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: background 0.1s, color 0.1s;
+  box-shadow: 3px 3px 0px #000;
+}
+
+button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px 0px #000;
+}
+
+/* Record-type add buttons */
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.btn-record {
+  background: var(--border);
+  color: var(--text-main);
+}
+
+.btn-record:hover:not(:disabled) {
+  background: var(--accent-cyan);
+  color: var(--bg-main);
+}
+
+.btn-record:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Copy-to-clipboard button */
+.btn-copy {
+  width: 100%;
+  background: var(--accent-purple);
+  color: var(--bg-main);
+}
+
+.btn-copy:hover {
+  background: var(--accent-cyan);
+}
+
+/* ── Dynamic Record Cards ─────────────────────────────────────── */
+.record-card {
+  border: 2px solid var(--border);
+  background: var(--bg-main);
+  padding: 15px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.record-card h3 {
+  margin-bottom: 10px;
+  color: var(--text-main);
+}
+
+.btn-del-card {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--error);
+  color: #fff;
+  box-shadow: 2px 2px 0px #000;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-remove-input {
+  background: var(--error);
+  color: #fff;
+  margin-top: 5px;
+}
+
+.btn-add-input {
+  background: transparent;
+  border: 2px dashed var(--success);
+  color: var(--success);
+  width: 100%;
+  margin-top: 5px;
+}
+
+.btn-add-input:hover {
+  background: var(--success);
+  color: var(--bg-main);
+}
+
+/* ── JSON Output ──────────────────────────────────────────────── */
+pre {
+  background: var(--bg-main);
+  padding: 15px;
+  border: 2px solid var(--border);
+  overflow-x: auto;
+  color: var(--output-green);
+  font-size: 1.3rem;
+  min-height: 400px;
+  font-family: 'VT323', monospace;
+}
+
+/* ── CI Status Bar ────────────────────────────────────────────── */
+.status-bar {
+  margin-top: 10px;
+  padding: 10px;
+  background: var(--border);
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.status-pass {
+  border-color: var(--success);
+  color: var(--success);
+  background: rgba(63, 185, 80, 0.1);
+}
+
+.status-fail {
+  border-color: var(--error);
+  color: var(--error);
+  background: rgba(248, 81, 73, 0.1);
+}
+
+/* ================================================================
+   FAQ ACCORDION
+   Native <details>/<summary> — zero JavaScript.
+   Below the fold: human-friendly, fully crawler-readable.
+   Matches pixel-art theme via the same CSS tokens above.
+   ================================================================ */
+
+.faq-section {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.faq-heading {
+  color: var(--accent-purple);
+  border-bottom: 2px dashed var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.faq-intro {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  margin-top: -12px;
+  margin-bottom: 20px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ── Individual accordion item ────────────────────────────────── */
+details.faq-item {
+  background: var(--bg-panel);
+  border: 2px solid var(--border);
+  box-shadow: 5px 5px 0px #000;   /* pixel hard shadow */
+  margin-bottom: 16px;
+  transition: border-color 0.15s;
+}
+
+details.faq-item[open] {
+  border-color: var(--accent-cyan);
+}
+
+/* ── Summary (clickable header) ───────────────────────────────── */
+details.faq-item summary {
+  padding: 14px 18px;
+  cursor: pointer;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.25rem;
+  list-style: none;        /* hide default browser triangle */
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  user-select: none;
+}
+
+/* Remove WebKit default disclosure marker */
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom pixel-art toggle indicator */
+details.faq-item summary::before {
+  content: "▶";
+  color: var(--accent-purple);
+  flex-shrink: 0;
+  transition: transform 0.15s;
+  font-size: 1rem;
+  margin-top: 3px;
+}
+
+details.faq-item[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details.faq-item summary:hover {
+  color: var(--accent-purple);
+}
+
+/* ── Answer body ──────────────────────────────────────────────── */
+.faq-answer {
+  padding: 0 18px 18px;
+  color: var(--text-main);
+  font-size: 1.2rem;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.6;
+  border-top: 2px dashed var(--border);
+}
+
+.faq-answer p {
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+.faq-answer code {
+  background: var(--bg-main);
+  border: 1px solid var(--border);
+  color: var(--output-green);
+  padding: 1px 6px;
+  font-family: 'VT323', monospace;
+  font-size: 1.15rem;
+}
+
+/* Inline keyword highlight classes (used in FAQ answers) */
+.kw  { color: var(--accent-purple); }  /* keyword / conversational phrase */
+.kc  { color: var(--accent-cyan);   }  /* sub-heading / cyan label        */
+
+/* ── Responsive tweaks ────────────────────────────────────────── */
+@media (max-width: 780px) {
+  .col-left,
+  .col-right {
+    min-width: 100%;
+  }
+
+  .faq-section {
+    min-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+}
